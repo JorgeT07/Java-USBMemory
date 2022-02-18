@@ -12,13 +12,16 @@ public class driver {
         double usb = Double.valueOf(clean); //turn the numbers from the string into double
         double actual; // will use this to store the result of the memory
         StringBuilder ans = new StringBuilder(); //create a stringbuilder to keep adding to the result
+
         if(back.equals("GB") ){ //if the end of the string was gb or mb it will be doing an action accordingly
-            actual = usb * .07; //here we multiply the 7% to be reduced in the next function
-            actual = usb - actual; //we subtract the 7% and store it in the actual value
+            if(usb < 1){
+                actual = (usb * 100) * .93;
+                ans = ans.append(format("%.2f", actual) + " MB");
+            }
+            actual = usb * .93; //here we multiply the 7% to be reduced in the next function
             ans = ans.append(format("%.2f", actual) + " GB"); //we convert the answer into a stringbuilder object and ad gb to the end of it
         }else if(back.equals("MB")){ //if the end if mb we take this action
-            actual = usb * .07;
-            actual = usb - actual;
+            actual = usb * .93;
             int reduced = (int)Math.round(actual); //we convert the double into int and round it down
             ans = ans.append(reduced + " MB");
         }
